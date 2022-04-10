@@ -2,7 +2,7 @@
 // @name         Wikipedia is a Highlighter
 // @namespace    http://wikipedia.org./
 // @version      0.3
-// @description  Highlight the "is a" relation in the summary section of a wikipedia article for quick access.
+// @description  Style the "is-a" relation in the summary section of a wikipedia article for quick access.
 // @author       me
 // @match        https://en.wikipedia.org/wiki/*
 // @grant        none
@@ -12,21 +12,26 @@
   'use strict';
   console.log('wiki.js v0.2');
 
+  let matchFound = 0;
+
   let i = 0;
-  for (i = 0; i < 3; i++) {
-    console.log(i);
+  for (i = 0; i < 5; i++) {
+    matchFound = 0;
     console.log(i.toString());
 
     let text = document.getElementsByClassName('mw-parser-output')[0].getElementsByTagName('p')[i];
 
-    let modifiedText = text.innerHTML;
+    // let modifiedText = text.innerHTML;
 
-    modifiedText = modifiedText.replace(
+    let modifiedText = text.innerHTML.replace(
       //' was a ',
       // /(wa|i)s\san?/,
       /\s(was|is)\s(an?|the)\s/,
       match => {
         console.log(`match found`);
+        matchFound = 1;
+
+        // todo: get offset of string and get the next word
 
         return `<span \
         style="\
@@ -40,6 +45,9 @@
       }
     );
     text.innerHTML = modifiedText;
+    if (matchFound === 1) {
+      break;
+    }
   }
 
   // console.log(modifiedText);
