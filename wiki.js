@@ -26,7 +26,7 @@
     let modifiedText = text.innerHTML.replace(
       //' was a ',
       // /(wa|i)s\san?/,
-      /\s(was|is)\s(an?|the)\s/,
+      /\s(was|is)\s(a|an|the)\s/,
       match => {
         console.log(`match found`);
         matchFound = 1;
@@ -44,8 +44,8 @@
         "> ${match} </span>`;
       }
     );
-    text.innerHTML = modifiedText;
     if (matchFound === 1) {
+      text.innerHTML = modifiedText;
       break;
     }
   }
